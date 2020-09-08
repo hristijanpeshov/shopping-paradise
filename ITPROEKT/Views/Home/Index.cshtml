@@ -3,7 +3,8 @@
     ViewBag.Title = "Home Page";
 }
 @Styles.Render("~/Content/Site.css")
-@Styles.Render("~/Content/Card.css") 
+@Styles.Render("~/Content/Card.css")
+@Styles.Render("~/Content/font-awesome.min.css") 
 <div class="container">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
@@ -30,7 +31,6 @@
 <div class="container mt-3">
     <h2 class="font-weight-bold text-">Top Rated Products</h2>
     <div class="row">
-        <div class="float-left bg-dark"></div>
         @for (int i=0;i<3;i++)
         {
             <div class="col-md-4" id="productCard">
@@ -41,14 +41,18 @@
                         <p class="desc">@Model.ElementAt(i).Description</p>
                         <a class="font-weight-bold float-right" id="Name" href="/Sellers/Details/@Model.ElementAt(i).SellerId">@Model.ElementAt(i).Seller.Name</a>
                         <div class="rating-wrap">
-                            <div class="label-rating">@Model.ElementAt(i).Rating</div>
-                            <div class="label-rating">100 in stock </div>
+                        @for(int j=0;j< @Model.ElementAt(i).Rating; j++)
+                        {
+                            <span class="fa fa-star" style="color:orange;"></span>
+                        }
+                            
+                        <div class="label-rating">@Model.ElementAt(i).Category </div>
                         </div> <!-- rating-wrap.// -->
                     </figcaption>
                     <div class="bottom-wrap">
                         <a href="" class="btn btn-sm btn-primary float-right">Order Now</a>
                         <div class="price-wrap h5">
-                            <span class="price-new">$@Model.ElementAt(i).Price</span>
+                            <span class="price-new">$@Html.DisplayFor(m => m.ElementAt(i).Price)</span>
                         </div> <!-- price-wrap.// -->
                     </div> <!-- bottom-wrap.// -->
                 </figure>
@@ -56,3 +60,4 @@
         }
     </div>
 </div>
+

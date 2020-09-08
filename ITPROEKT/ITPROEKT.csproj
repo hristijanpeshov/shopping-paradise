@@ -201,6 +201,10 @@
     <Compile Include="Migrations\202009071712243_new_m5.Designer.cs">
       <DependentUpon>202009071712243_new_m5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009081450329_mg5.cs" />
+    <Compile Include="Migrations\202009081450329_mg5.Designer.cs">
+      <DependentUpon>202009081450329_mg5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -377,7 +381,12 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\SearchBar.css" />
+    <Content Include="Content\SideBar.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\homepage-carousel.jpg" />
@@ -411,6 +420,11 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -650,6 +664,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009071712243_new_m5.resx">
       <DependentUpon>202009071712243_new_m5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009081450329_mg5.resx">
+      <DependentUpon>202009081450329_mg5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

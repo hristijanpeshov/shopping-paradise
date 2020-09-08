@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -20,6 +21,7 @@ namespace ITPROEKT.Models
         public String Description { get; set; }
         public int SellerId { get; set; }
         public virtual Seller Seller { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public float Price { get; set; }
         public float Rating { get; set; }
 

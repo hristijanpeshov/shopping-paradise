@@ -336,3 +336,4 @@ C:\Users\datah\source\repos\Shopper's Paradise\shparadise\ITPROEKT\obj\Debug\ITP
 C:\Users\datah\source\repos\Shopper's Paradise\shparadise\ITPROEKT\obj\Debug\ITPROEKT.csproj.CopyComplete
 C:\Users\datah\source\repos\Shopper's Paradise\shparadise\ITPROEKT\obj\Debug\ITPROEKT.dll
 C:\Users\datah\source\repos\Shopper's Paradise\shparadise\ITPROEKT\obj\Debug\ITPROEKT.pdb
+C:\Users\datah\source\repos\Shopper's Paradise\shparadise\ITPROEKT\obj\Debug\ITPROEKT.Migrations.mg5.resources
