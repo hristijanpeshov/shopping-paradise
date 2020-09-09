@@ -22,6 +22,7 @@ namespace ITPROEKT.Models
         public virtual Seller Seller { get; set; }
         public float Price { get; set; }
         public float Rating { get; set; }
+        public int InStock { get; set; }
 
     }
 }
