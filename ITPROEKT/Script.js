@@ -3,7 +3,6 @@ var sortCriteria = "";
 
 $(document).ready(function () {
     ajaxCall(0);
-
     //PAGINATION FUNCTIONALITY
     $(".page-item").click(function () {
         if ($(this).attr('id') === "left") {
@@ -40,60 +39,12 @@ $(document).ready(function () {
         $("#mainContainer").empty();
         sortCriteria = $(this).attr('sortBy');
         sort();
-    })
+    });
 });
 
-
-function sort() {
-    ajaxCall(currentPage, true);
-}
-
-function listItems(data, sortCall) {
-
+function listItems(data) {
     var divNum;
     var div;
-
-    //SORTING
-    if (sortCall == true) {
-        switch (sortCriteria) {
-            case "min-max":
-                data.sort(function (a, b) {
-                    return a.Price - b.Price;
-                });
-                break;
-            case "max-min":
-                data.sort(function (a, b) {
-                    return b.Price - a.Price;
-                });
-                break;
-            case "name":
-                data.sort(function (a, b) {
-                    var nameA = a.Name.toUpperCase(); 
-                    var nameB = b.Name.toUpperCase();
-                    if (nameA < nameB) {
-                        return -1;
-                    }
-                    if (nameA > nameB) {
-                        return 1;
-                    }
-                    return 0;
-                });
-                break;
-            case "seller":
-                data.sort(function (a, b) {
-                    var nameA = a.Seller.Name.toUpperCase();
-                    var nameB = b.Seller.Name.toUpperCase();
-                    if (nameA < nameB) {
-                        return -1;
-                    }
-                    if (nameA > nameB) {
-                        return 1;
-                    }
-                    return 0;
-                });
-                break;
-        }
-    }
 
     for (var i = 0; i < data.length; i++) {
         if (i % 3 == 0) {
@@ -136,6 +87,55 @@ function listItems(data, sortCall) {
     }
 }
 
+function sort() {
+    ajaxCall(currentPage, true);
+}
+
+function arrangeData(data, sortCall) {
+    //SORTING
+    if (sortCall) {
+        switch (sortCriteria) {
+            case "min-max":
+                data.sort(function (a, b) {
+                    return a.Price - b.Price;
+                });
+                break;
+            case "max-min":
+                data.sort(function (a, b) {
+                    return b.Price - a.Price;
+                });
+                break;
+            case "name":
+                data.sort(function (a, b) {
+                    var nameA = a.Name.toUpperCase(); 
+                    var nameB = b.Name.toUpperCase();
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                break;
+            case "seller":
+                data.sort(function (a, b) {
+                    var nameA = a.Seller.Name.toUpperCase();
+                    var nameB = b.Seller.Name.toUpperCase();
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                break;
+        }
+    }
+    listItems(data);
+}
+
 function ajaxCall(pageNum, sortCall) {
     pageNum *= 9;
     $.ajax({
@@ -143,7 +143,7 @@ function ajaxCall(pageNum, sortCall) {
         method: "GET",
         dataType: "json",
         success: function (data) {
-            listItems(data, sortCall);
+            arrangeData(data, sortCall);
         }
     });
 }
