@@ -17,8 +17,15 @@ namespace ITPROEKT.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Seller);
-            return View(products.ToList());
+            if ( db.Products.Count() == 9 )
+            {
+                ViewBag.numPages = 1;
+            }
+            else
+            {
+                ViewBag.numPages = ((int)db.Products.Count() / 9) + 1;
+            }
+            return View();
         }
 
         // GET: Products/Details/5

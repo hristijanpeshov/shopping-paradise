@@ -20,17 +20,11 @@ namespace ITPROEKT
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/bootbox.js",
-                      "~/Scripts/DataTables/jquery.datatables.js",
-                      "~/Scripts/DataTables/datatables.bootstrap.js"
-                      ));
+                      "~/Scripts/bootstrap.bundle.js", "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/DataTables/css/datatables.bootstrap.css"
-                      ));
+                      "~/Content/site.css"));
         }
     }
 }

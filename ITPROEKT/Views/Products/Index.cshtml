@@ -1,97 +1,57 @@
-﻿@model IEnumerable<ITPROEKT.Models.Product>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<p>
-    Category: @*@Html.DropDownList("Category", new SelectList(Enum.GetValues(typeof(ITPROEKT.Models.ProductCategory))),
-        "Select Category", new { @class = "form-control" })*@
-    <select id="selectField" class="form-control">
-        <option value=""></option>
-        <option value="Clothes">Clothes</option>
-        <option value="Technology">Technology</option>
-        <option value="MakeUp">MakeUp</option>
+    <div class="d-flex">
+        <h3 class="p-2 mr-auto">All items</h3>
+        <div class="p-2">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by:
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#" sortBy = "min-max">Price min-max</a>
+                    <a class="dropdown-item" href="#" sortBy = "max-min">Price max-min</a>
+                    <a class="dropdown-item" href="#" sortBy = "name">Name</a>
+                    <a class="dropdown-item" href="#" sortBy = "seller">Seller</a>
+                </div>
+            </div>
+        </div>
 
-    </select>
-</p>
-<table class="table" , id="productTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Seller.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.URL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                 
-                <a href="\Sellers\Details\@item.SellerId">@item.Seller.Name</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <img style="max-width:200px" src="@item.URL" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+    </div>
+
+    <hr />
+
+    <div id="mainContainer"></div>
+
+    <nav>
+        <ul class="pagination" numPages ="@ViewBag.numPages">
+            <li class="page-item" id="left">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+
+            @for (var i = 1; i < ViewBag.numPages + 1; i++)
+            {
+                var id = i - 1;
+                <li class="page-item" id="@id"><a class="page-link" href="#">@i</a></li>
+            }
+
+            <li class="page-item" id="right">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
 
 @section scripts{
-    <script>
-       @*$("#productTable").DataTable();*@
-        $(document).ready(function () {
-            var table = $("#productTable").DataTable();
-
-            $('#selectField').on('change', function () {
-                table.columns(0).search(this.value).draw();
-            });
-        });
-    </script>
+    <script src="~/Script.js"></script>
 }
