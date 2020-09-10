@@ -7,11 +7,11 @@ namespace ITPROEKT.Models
 {
     public class Cart
     {
-        public List<Product> productsInCart { get; set; }
+        Dictionary<Product, int> productsInCart;
 
         public Cart()
         {
-            productsInCart = new List<Product>();
+            productsInCart = new Dictionary<Product, int>();
         }
     }
 }

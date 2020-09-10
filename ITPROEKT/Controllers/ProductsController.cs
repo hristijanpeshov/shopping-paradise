@@ -17,7 +17,7 @@ namespace ITPROEKT.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            if ( db.Products.Count() == 9 )
+            if ( db.Products.Count() <= 9 )
             {
                 ViewBag.numPages = 1;
             }

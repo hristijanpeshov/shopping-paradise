@@ -1,8 +1,8 @@
 ﻿var currentPage = 0;
 var sortCriteria = "";
-
+var filterCategory = "All";
 $(document).ready(function () {
-    ajaxCall(0);
+    ajaxCat(filterCategory, false);
 
     //PAGINATION FUNCTIONALITY
     $(".page-item").click(function () {
@@ -13,7 +13,7 @@ $(document).ready(function () {
             else {
                 currentPage -= 1;
                 $("#mainContainer").empty();
-                ajaxCall(currentPage);
+                ajaxCat(filterCategory, true);
             }
         }
         else if ($(this).attr('id') === "right") {
@@ -24,35 +24,40 @@ $(document).ready(function () {
             else {
                 currentPage += 1;
                 $("#mainContainer").empty();
-                ajaxCall(currentPage);
+                ajaxCat(filterCategory, true);
             }
         }
         else {
             currentPage = $(this).attr('id');
             currentPage = parseInt(currentPage);
             $("#mainContainer").empty();
-            ajaxCall($(this).attr('id'));
+            ajaxCat(filterCategory, true);
         }
     });
 
     //SORT
-    $(".dropdown-item").click(function () {
-        $("#mainContainer").empty();
+    $(".sort").click(function () {
         sortCriteria = $(this).attr('sortBy');
-        sort();
+        FilterAndSort();
     })
+
+    //FILTER
+    $(".cat").click(function () {
+        filterCategory = $(this).attr('cate');
+        FilterAndSort();
+    })
+
 });
 
-
-function sort() {
-    ajaxCall(currentPage, true);
+function FilterAndSort() {
+    ajaxCat(filterCategory, true);
 }
+
 
 function listItems(data, sortCall) {
 
     var divNum;
     var div;
-
     //SORTING
     if (sortCall == true) {
         switch (sortCriteria) {
@@ -68,7 +73,7 @@ function listItems(data, sortCall) {
                 break;
             case "name":
                 data.sort(function (a, b) {
-                    var nameA = a.Name.toUpperCase(); 
+                    var nameA = a.Name.toUpperCase();
                     var nameB = b.Name.toUpperCase();
                     if (nameA < nameB) {
                         return -1;
@@ -94,16 +99,30 @@ function listItems(data, sortCall) {
                 break;
         }
     }
-
-    for (var i = 0; i < data.length; i++) {
+    for (var i = currentPage; i < (currentPage + 1) * 9; i++) {
         if (i % 3 == 0) {
-            divNum = i;
-            div = $("<div></div>").attr({
-                class: 'row',
-                index: divNum
-            });
-            $("#mainContainer").append(div);
+            if (i % 9 == 0) {
+                $("#mainContainer").empty();
+                divNum = i;
+                div = $("<div></div>").attr({
+                    class: 'row',
+                    index: divNum
+                });
+                $("#mainContainer").append(div);
+            }
+            else {
+                divNum = i;
+                div = $("<div></div>").attr({
+                    class: 'row',
+                    index: divNum
+                });
+                $("#mainContainer").append(div);
+            }
+            
         }
+    
+            
+        
 
         var imgURL = data[i].URL;
         var productName = data[i].Name;
@@ -136,10 +155,9 @@ function listItems(data, sortCall) {
     }
 }
 
-function ajaxCall(pageNum, sortCall) {
-    pageNum *= 9;
+function ajaxCat(category, sortCall) {
     $.ajax({
-        url: "https://localhost:44361/api/Products/GetProducts/" + pageNum,
+        url: "https://localhost:44361/api/Products/GetByCategory/" + category,
         method: "GET",
         dataType: "json",
         success: function (data) {

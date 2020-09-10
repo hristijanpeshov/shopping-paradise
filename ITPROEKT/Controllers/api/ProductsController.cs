@@ -13,10 +13,15 @@ namespace ITPROEKT.Controllers.api
     {
 
         ApplicationDbContext db = new ApplicationDbContext();
-        [Route("api/Products/GetProducts/{offset}")]
-        public IEnumerable<Product> GetProducts(int offset) {            
-            return db.Products.OrderBy(m => m.Id).Skip(offset).Take(9).ToList();
+       
+        [Route("api/Products/GetByCategory/{category}")]
+        public IEnumerable<Product> GetByCategory(string category)
+        {
+            if (category.Equals("All"))
+            {
+                return db.Products.ToList();
+            }
+            return db.Products.Where(m => m.Category.ToString().Equals(category)).ToList();
         }
-
     }
 }

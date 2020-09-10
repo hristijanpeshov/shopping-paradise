@@ -25,22 +25,35 @@
             </ul>
             <ul class="navbar-nav float-right mr-5">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Account
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="~/Account/Login">Login</a>
-                        <a class="dropdown-item" href="~/Account/Register">Register</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="~/Account/Login">Login</a>
+                            
+                            <a class="dropdown-item" href="~/Account/Register">Register</a>
+                        </div>
+                    }
+                    else
+                    {
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="~/Manage/Index">Manage account</a>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+                    }
+                </div>
+                    }
                 </li>
             </ul>
         </div>
     </nav>
 
 
-    <div class="container body-content">
+    <div class="container-fluid">
         @RenderBody()
     </div>
 

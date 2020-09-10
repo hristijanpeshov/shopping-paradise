@@ -7,16 +7,27 @@
 
     <div class="d-flex">
         <h3 class="p-2 mr-auto">All items</h3>
-        <div class="p-2">
+        <div class="row p-2">
+            <div class="dropdown pr-2" id="selectField">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownCatMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter category:
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item cat" href="#" cate="All">All</a>
+                    <a class="dropdown-item cat" href="#" cate="Clothes">Clothes</a>
+                    <a class="dropdown-item cat" cate="Technology">Technology</a>
+                    <a class="dropdown-item cat" cate="Make Up">Make Up</a>
+                </div>
+            </div>
             <div class="dropdown">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sort by:
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#" sortBy = "min-max">Price min-max</a>
-                    <a class="dropdown-item" href="#" sortBy = "max-min">Price max-min</a>
-                    <a class="dropdown-item" href="#" sortBy = "name">Name</a>
-                    <a class="dropdown-item" href="#" sortBy = "seller">Seller</a>
+                    <a class="dropdown-item sort" href="#" sortBy="min-max">Price min-max</a>
+                    <a class="dropdown-item sort" href="#" sortBy="max-min">Price max-min</a>
+                    <a class="dropdown-item sort" href="#" sortBy="name">Name</a>
+                    <a class="dropdown-item sort" href="#" sortBy="seller">Seller</a>
                 </div>
             </div>
         </div>
