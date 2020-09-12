@@ -1,0 +1,97 @@
+﻿@model ITPROEKT.Models.Seller
+
+@{ ViewBag.Title = "Details"; }
+
+
+@Styles.Render("~/Content/Card.css")
+<style>
+    #product-details {
+        max-width: 100%;
+    }
+
+    .btn-round {
+        border-radius: 30px;
+    }
+
+    .left-background {
+        background-color: #282726;
+    }
+
+    .right-background {
+        background-color: white;
+    }
+
+    .text-cyan {
+        color: #35bdff;
+    }
+
+    img {
+    }
+
+    #description-product {
+        max-width: 80%;
+    }
+
+    .alignleft {
+        float: left;
+        padding-left: 10%;
+    }
+
+    #textbox {
+        clear: both;
+        max-width: 80%;
+    }
+
+    .alignright {
+        float: right;
+        max-width: 60%;
+    }
+</style>
+
+<div id="product-details">
+    <div class="d-md-flex mt-5 mx-5 py-5 align-items-center">
+        <div class="row w-100" style="background-color:#ccd9de">
+
+            <!-- First Half -->
+
+            <div class="col-md-6 p-0 left-background">
+                <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+                    <div class="pt-5 pb-5">
+                        <img class="w-75 rounded-circle z-depth-2" src="@Model.URL" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Half -->
+
+            <div class="col-md-6 p-0  right-background">
+                <div class="h-md-100 p-5">
+                    <h1>@Model.Name</h1>
+                    <br />
+                    <h2>@Model.Category</h2>
+                    <p class="text-justify" id="description-product">
+                        @Model.Vision
+                        First example: create a row
+                        ). Then, add the desired number of columns (tags with appropriate .col-*-* classes). The first star (*) represents the responsiveness: sm, md, lg or xl, while the second star represents a number, which should add up to 12 for each row.
+
+                        Second example: instead of adding a number to each col, let bootstrap handle the layout, to create equal width columns: two "col" elements = 50% width to each col. three cols = 33.33% width to each col. four cols = 25% width, etc. You can also use .col-sm|md|lg|xl to make the columns responsive.
+
+                        Below we have collected some examples of basic Bootstrap 4 grid layouts.
+                    </p>
+                    
+                </div>
+
+                <div class="h-md-100 pl-5 pt-2 h5">
+                    <p>
+                        Origin: @Model.Country
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SellerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

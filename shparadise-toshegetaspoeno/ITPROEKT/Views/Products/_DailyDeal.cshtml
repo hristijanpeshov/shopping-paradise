@@ -1,0 +1,112 @@
+﻿@model ITPROEKT.Models.Product
+
+<style>
+    #product-details {
+    }
+
+    .btn-round {
+        border-radius: 30px;
+    }
+
+    .left-background {
+        background-color: #e0ebf1;
+    }
+
+    .right-background {
+        background-color: white;
+    }
+
+    .text-cyan {
+        color: #35bdff;
+    }
+
+    #img-Product {
+        max-width:100%;
+        max-height:100%;
+    }
+
+    #description-product {
+        max-width: 80%;
+    }
+
+    .alignleft {
+        float: left;
+        padding-left: 10%;
+    }
+
+    #textbox {
+        clear: both;
+        max-width: 80%;
+    }
+
+    .alignright {
+        float: right;
+        max-width: 60%;
+    }
+</style>
+<div id="product-details" style="background-color:#ccdde4">
+    <div class="d-md-flex mt-5 mx-5 py-5 align-items-center">
+        <div class="row w-100" style="background-color:#ccd9de">
+
+            <!-- First Half -->
+
+            <div class="col-md-6 p-0 left-background">
+                <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+                    <div class="logoarea pt-5 pb-5">
+                        <img id="img-Product" src="@Model.URL" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Half -->
+
+            <div class="col-md-6 p-0  right-background">
+                <div class="h-md-100 p-5">
+                    <h1>@Model.Name</h1>
+                    <br />
+                    <h2>@Model.Seller.Name - @Model.Category</h2>
+                    <p class="text-justify" id="description-product">
+                        @Model.Description
+                        First example: create a row
+                        ). Then, add the desired number of columns (tags with appropriate .col-*-* classes). The first star (*) represents the responsiveness: sm, md, lg or xl, while the second star represents a number, which should add up to 12 for each row.
+
+                        Second example: instead of adding a number to each col, let bootstrap handle the layout, to create equal width columns: two "col" elements = 50% width to each col. three cols = 33.33% width to each col. four cols = 25% width, etc. You can also use .col-sm|md|lg|xl to make the columns responsive.
+
+                        Below we have collected some examples of basic Bootstrap 4 grid layouts.
+                    </p>
+
+                </div>
+                <div class="h-md-100 pl-1 pt-2 h4" id="textbox">
+                    <div class="row">
+                        <div class="col-5 pl-5">
+                            Old price:
+                        </div>
+                        <div class="col-3">
+                            @{ 
+                                var oldPrice = Model.Price * 2;
+                            <del>$@oldPrice</del>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="h-md-100 pl-0 pt-2 h3" id="textbox">
+                    <p class="alignleft">Today's Deal Price:&nbsp;&nbsp;@Model.Price$</p>
+                    @*<button type="button" class="btn-round text-white btn alignright" style="background-color: #65a4bd">Order Now</button>
+                    *@
+                    @Html.ActionLink("Order Now", "DailyDealDetails", new { @class = "btn btn-primary btn-large", id = Model.Id })
+                    <br />
+                    <hr />
+                </div>
+                @*              <div class="h-md-100 pl-5 pt-2 h3">
+            <p>
+                Colors: &nbsp;&nbsp;
+                <button type="button" class="btn-round btn" style="background-color:green;width:60px;height:30px;"></button>
+                <button type="button" class="btn-round btn" style="background-color:cadetblue;width:60px;height:30px;"></button>
+                <button type="button" class="btn-round btn" style="background-color:darkorange;width:60px;height:30px;"></button>
+            </p>
+        </div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
