@@ -81,12 +81,12 @@ ow we have collected some examples of basic Bootstrap 4 grid layouts.
                 
                 <div class="h-md-100 pl-5 pt-2 h3">
       
-                    <form id="subscriptionForm" action="/Orders/AddToCart" method="post">
+                    <form id="subscriptionForm" action="/Products/AddToCart" method="post">
                         @Html.HiddenFor(m => m.Id)
                         <div class="h-md-100 pl-0 pt-2 h3" id="textbox">
                             <p class="alignleft">Price:&nbsp;&nbsp;@Model.Price$</p>
                             <button type="submit" id="order" class="btn-round text-white btn alignright" style="background-color: #65a4bd">Order Now</button>
-
+                            @Html.ActionLink("Or", "Buy", new { id=Model.Id})
                             <br />
                             <hr />
                         </div>

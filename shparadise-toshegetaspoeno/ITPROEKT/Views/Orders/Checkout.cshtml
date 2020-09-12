@@ -1,5 +1,4 @@
-﻿@model ITPROEKT.Models.OrdersViewModel
-
+﻿@model IEnumerable<ITPROEKT.Models.Order>
 @{
     ViewBag.Title = "Checkout";
 }
@@ -91,25 +90,32 @@
                         <div class="col-2">
                             Price
                         </div>
+                        <div class="col-2">
+                            Delete
+                        </div>
                     </div>
                     <hr />
-                    @foreach (var item in Model.ProductsInCart)
-                    {
+                    
+                      @for(int i=0; i<Model.ToList().Count; i++)
+                                {
                         <div class="row">
                             <div class="col-3">
-                                <img style="max-width:100px; max-height:100px" src="@item.Product.URL" />
+                                <img style="max-width:100px; max-height:100px" src="@Model.ElementAt(i).Product.URL" />
                             </div>
                             <div class="col-2">
-                                @Html.DisplayFor(modelItem => item.Product.Name)
+                                @Html.DisplayFor(modelItem => @Model.ElementAt(i).Product.Name)
                             </div>
                             <div class="col-2">
-                                @Html.DisplayFor(modelItem => item.Status)
+                                @Html.DisplayFor(modelItem => @Model.ElementAt(i).Status)
                             </div>
                             <div class="col-2">
-                                @Html.DisplayFor(modelItem => item.Quantity)
+                                @Html.DisplayFor(modelItem => @Model.ElementAt(i).Quantity)
                             </div>
                             <div class="col-2">
-                                @Html.DisplayFor(modelItem => item.TotalAmount)
+                                @Html.DisplayFor(modelItem => @Model.ElementAt(i).TotalAmount)
+                            </div>
+                            <div class="col-2">
+                                @Html.ActionLink("Delete item", "DeleteItem", new { id = @i })
                             </div>
                         </div>
                         <hr />
@@ -152,7 +158,7 @@
                         <p>
                             @{
                                 float sum = 0;
-                                foreach (var item in Model.ProductsInCart)
+                                foreach (var item in Model)
                                 {
                                     sum += item.TotalAmount;
                                 }
@@ -163,11 +169,13 @@
                         <br />
                         <p>
                             <span class="btnleft">
-                                <button type="button" class="btn btn-round" style="background-color:white; border-color:dimgray; color:darkcyan">Cancel</button>
+                                @Html.ActionLink("Cancel","Index","Home", new { @class = "btn btn-round", @style = "background-color:white; border-color:dimgray; color:darkcyan" })
                             </span>
                             <span class="btnright" style="margin-right:100px">
-                                <a href="~/Orders/Buy">Buy</a>
-                                <button type="submit" class="btn btn-round btn-secondary" style="background-color:green; color:white; width:180%">Buy</button>
+                                @*@Html.ActionLink("Buy", "AddClubMember", "Account",new { id = "f5674807-2bfc-4199-b1fa-15fdd4572dee" } ,new { @class = "btn btn-round", @style = "background-color:green; color:white" });
+                               *@ @Html.ActionLink("Buy", "Buy", "Orders", new { @class = "btn btn-round", @style = "background-color:green; color:white" });
+                                @Html.ActionLink("Delete whole", "DeleteWholeCart", "Orders", new { @class = "btn btn-round", @style = "background-color:red; color:white" });
+                                
                             </span>
                             <br />
                         </p>
@@ -193,6 +201,17 @@
             </div>*@
     }
 </div>
+
+
+@*@section Scripts{
+    <script>
+
+        $("btn-del").click(function () {
+            var item = @Model[0];
+            var sd = @Model.ToList().IndexOf();
+        });
+    </script>
+    }*@
 @*asda
 
     <table class="table">

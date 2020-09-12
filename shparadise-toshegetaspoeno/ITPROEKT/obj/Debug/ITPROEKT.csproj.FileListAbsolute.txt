@@ -726,3 +726,7 @@ D:\Downloads\shparadise-toshegetaspoeno - Copy\shparadise-toshegetaspoeno\ITPROE
 D:\Downloads\shparadise-toshegetaspoeno - Copy\shparadise-toshegetaspoeno\ITPROEKT\obj\Debug\ITPROEKT.Migrations.mmn2.resources
 D:\Downloads\shparadise-toshegetaspoeno - Copy\shparadise-toshegetaspoeno\ITPROEKT\obj\Debug\ITPROEKT.Migrations.mnb1.resources
 D:\Downloads\shparadise-toshegetaspoeno - Copy\shparadise-toshegetaspoeno\ITPROEKT\obj\Debug\ITPROEKT.csprojAssemblyReference.cache
+D:\Downloads\shparadise-toshegetaspoeno - Copy\shparadise-toshegetaspoeno\ITPROEKT\obj\Debug\ITPROEKT.Migrations.nova.resources
+D:\Downloads\shparadise-toshegetaspoeno - Copy\shparadise-toshegetaspoeno\ITPROEKT\obj\Debug\ITPROEKT.Migrations.nova_2.resources
+D:\Downloads\shparadise-toshegetaspoeno - Copy\shparadise-toshegetaspoeno\ITPROEKT\obj\Debug\ITPROEKT.Migrations.nova_3.resources
+D:\Downloads\shparadise-toshegetaspoeno - Copy\shparadise-toshegetaspoeno\ITPROEKT\obj\Debug\ITPROEKT.Migrations.nova_44.resources

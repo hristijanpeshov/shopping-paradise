@@ -21,6 +21,30 @@ namespace ITPROEKT.Controllers
             return View();
         }
 
+        
+
+        [HttpPost]
+        public void AddToCart(int id)
+        {
+            Order order = new Order();
+            order.Quantity = Int32.Parse(Request["Quantity"].ToString());
+            order.Color = Request["color"].ToString();
+            order.ProductId = id;
+            order.Product = db.Products.Find(id);
+            string req = Request["price"];
+            order.Product.Price = float.Parse(req.ToString());
+            order.TotalAmount = order.Quantity * order.Product.Price;
+            order.Status = "In cart";
+            if (Session["cart"] == null)
+            {
+                Session["cart"] = new List<Order>();
+            }
+            List<Order> orders = (List<Order>)Session["cart"];
+            orders.Add(order);
+            /*db.Orders.Add(order);
+            db.SaveChanges();*/
+        }
+
         public ActionResult DailyDealDetails(int? id)
         {
             if (id == null)

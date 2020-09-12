@@ -19,46 +19,58 @@ namespace ITPROEKT.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            List<FinalOrder> finals =  db.FinalOrders.ToList();
+            List<FinalOrder> finals = db.FinalOrders.Include(m=> m.Orders).ToList();
             return View(finals);
         }
 
         public ActionResult Checkout()
         {
+            List<Order> finals = (List<Order>)Session["cart"];
+            return View(finals);
+        }
+
+        public ActionResult DeleteItem(int id)
+        {
             List<Order> orders = (List<Order>)Session["cart"];
-            OrdersViewModel ordersViewModel = new OrdersViewModel();
-            ordersViewModel.ProductsInCart = orders;
-            return View(ordersViewModel);
+            orders.RemoveAt(id);
+            Session["cart"] = orders;
+            return RedirectToAction("Checkout");
         }
 
-        public void Buy()
+        public ActionResult DeleteWholeCart()
         {
-            var contextTwo = new EntityContext();
-            var or = ((Order) ((List<Order>) Session["cart"])[0]);
-            db.Orders.Add(or);
+            Session["cart"] = null;
+            return RedirectToAction("Checkout");
         }
-
-        [HttpPost]
-        public void AddToCart(int id)
+        [Authorize]
+        public ActionResult Buy()
         {
-            Order order = new Order();
-            order.Quantity = Int32.Parse(Request["Quantity"].ToString());
-            order.Color = Request["color"].ToString();
-            order.ProductId = id;
-            order.Product = db.Products.Find(id);
-            string req = Request["price"];
-            order.Product.Price = float.Parse(req.ToString());
-            order.TotalAmount = order.Quantity * order.Product.Price;
-            order.Status = "In cart";
-            if (Session["cart"] == null)
+            List<Order> orders = (List<Order>)Session["cart"];
+            FinalOrder finalOrder = new FinalOrder();
+            finalOrder.Orders = new List<Order>();
+            finalOrder.Orders = orders;
+            finalOrder.Info = DateTime.Now;
+            float sum = 0F;
+            finalOrder.IdentityUser = User.Identity.GetUserId();
+            foreach (var item in orders)
             {
-                Session["cart"] = new List<Order>();
+                sum += item.TotalAmount;
             }
-            List<Order> orders = (List<Order>)Session["cart"];
-            orders.Add(order);
-            /*db.Orders.Add(order);
-            db.SaveChanges();*/
+            finalOrder.TotalAmount = sum;
+            string id = User.Identity.GetUserId();
+            ApplicationUser user = db.Users.Find(id);
+            user.sumPaid += sum;
+            db.FinalOrders.Add(finalOrder);
+            db.SaveChanges();
+            Session["cart"] = null;
+            if (user.sumPaid > 1500 && !User.IsInRole("ClubUser"))
+            {
+                return RedirectToAction("AddClubMember", "Account", new { idd = id });
+            }
+            else return RedirectToAction("Index", "Products");
         }
+
+       
 
         
         

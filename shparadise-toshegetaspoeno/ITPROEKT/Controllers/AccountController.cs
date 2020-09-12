@@ -22,6 +22,16 @@ namespace ITPROEKT.Controllers
         {
         }
 
+
+        public async Task<ActionResult> AddClubMember(string idd)
+        {
+            UserManager.RemoveFromRole(idd, "User");
+            UserManager.AddToRole(idd, "ClubUser");
+            var user = UserManager.FindById(idd);
+            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+            return RedirectToAction("Index", "Products");
+        }
+
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
@@ -155,6 +165,8 @@ namespace ITPROEKT.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    UserManager.AddToRole(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

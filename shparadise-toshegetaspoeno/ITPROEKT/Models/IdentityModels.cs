@@ -38,9 +38,7 @@ namespace ITPROEKT.Models
         public System.Data.Entity.DbSet<ITPROEKT.Models.Seller> Sellers { get; set; }
 
         public System.Data.Entity.DbSet<ITPROEKT.Models.Order> Orders { get; set; }
-
         public System.Data.Entity.DbSet<ITPROEKT.Models.FinalOrder> FinalOrders { get; set; }
 
-        public System.Data.Entity.DbSet<ITPROEKT.Models.ToDeliverOrder> ToDeliverOrders { get; set; }
     }
 }
