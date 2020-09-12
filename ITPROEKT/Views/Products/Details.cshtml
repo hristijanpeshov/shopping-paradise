@@ -1,0 +1,160 @@
+﻿@model ITPROEKT.Models.Product
+
+@{ ViewBag.Title = "Details"; }
+@Styles.Render("~/Content/Card.css")
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        #product-details, .container {
+            max-width: 100%;
+        }
+
+        .btn-round {
+            border-radius: 30px;
+        }
+
+        .left-background {
+            background-color: #e0ebf1;
+        }
+
+        .right-background {
+            background-color: white;
+        }
+
+        .text-cyan {
+            color: #35bdff;
+        }
+
+
+        #description-product {
+            max-width: 80%;
+        }
+
+        .alignleft {
+            float: left;
+            padding-left: 10%;
+        }
+
+        #textbox {
+            clear: both;
+            max-width: 80%;
+        }
+
+        .alignright {
+            float: right;
+            max-width: 60%;
+        }
+    </style>
+@*<div id="product-details" style="background-color:#ccdde4">*@
+<div id="all" class="z-depth-2">
+    <div class="d-md-flex mt-5 mx-5 py-5 align-items-center">
+        <div class="row w-100" style="background-color:#ccd9de">
+
+            <!-- First Half -->
+
+            <div class="col-md-6 p-0 left-background">
+                <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+                    <div class="logoarea pt-5 pb-5">
+                        <img class="w-75" src="@Model.URL" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Half -->
+
+            <div class="col-md-6 p-0  right-background">
+                <div class="h-md-100 p-5">
+                    <h1>@Model.Name</h1>
+                    <br />
+                    <h2>@Model.Seller.Name - @Model.Category</h2>
+                    <p class="text-justify" id="description-product">
+                        @Model.Description
+                        First example: create a row
+                        ). Then, add the desired number of columns (tags with appropriate .col-*-* classes). The first star (*) represents the responsiveness: sm, md, lg or xl, while the second star represents a number, which should add up to 12 for each row.
+                        ow we have collected some examples of basic Bootstrap 4 grid layouts.
+                    </p>
+
+                </div>
+
+                <div class="h-md-100 pl-5 pt-2 h3">
+
+                    <form id="subscriptionForm" action="/Products/AddToCart" method="post">
+                        @Html.HiddenFor(m => m.Id)
+                        <div class="h-md-100 pl-0 pt-2 h3" id="textbox">
+                            <p class="alignleft">Price:&nbsp;&nbsp;@Model.Price$</p>
+                            <button type="submit" id="order" class="btn-round text-white btn alignright" style="background-color: #65a4bd">Order Now</button>
+                            <br />
+                            <hr />
+                        </div>
+                        <div class="row">
+                            <p class="col-lg-3 col-sm-6">
+                                <label for="Quantity">Quantity:</label>
+                            </p>
+                            <div class="col-lg-9 col-sm-6">
+                                <input type="number" class="form-control col-2" id="Quantity" name="Quantity" min="1" max="10" />
+                            </div>
+
+                        </div>
+                        <p>
+                            <input class="d-none" type="text" id="color" name="color" value="" />
+                            <input class="d-none" type="number" id="price" name="price" value="@Model.Price" />
+
+                        </p>
+                        <div class="row">
+                            <p class="col-lg-3 col-sm-6">
+                                Colors:
+                            </p>
+                            <div class="col-lg-6 col-sm-6">
+                                <button type="button" name="color" value="green" class="btn-round btn color-btn" style="background-color:green;width:60px;height:30px;"></button>
+                                <button type="button" name="color" value="cadetblue" class="btn-round btn color-btn" style="background-color:cadetblue;width:60px;height:30px;"></button>
+                                <button type="button" name="color" value="darkorange" class="btn-round btn color-btn" style="background-color:darkorange;width:60px;height:30px;"></button>
+                            </div>
+                        </div>
+                        <p id="selected-color">No color selected. Please select color.</p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+@section Scripts{
+        <script>
+            $(document).ready(function () {
+                $("#Quantity").attr("value", 1);
+            })
+            $(".color-btn").click(function () {
+                var color = this.getAttribute("value");
+                $("#color").attr("value", color);
+                document.getElementById("selected-color").innerHTML = "Your selected color is " + color;
+                
+                @*
+                       
+                Session["color"] = this.getAttribute("value");
+                var cl = Session["color"];
+                alert(cl);*@
+            })
+        </script>
+    }

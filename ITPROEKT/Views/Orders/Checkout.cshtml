@@ -1,0 +1,209 @@
+﻿@model IEnumerable<ITPROEKT.Models.Order>
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<style>
+    body {
+        background-color: #ccdde4;
+    }
+
+    .btn-round {
+        border-radius: 30px;
+    }
+
+    .left-background {
+        background-color: #e0ebf1;
+    }
+
+    .right-background {
+        background-color: antiquewhite;
+    }
+
+    .text-cyan {
+        color: antiquewhite;
+    }
+
+    img {
+    }
+
+    #description-product {
+        max-width: 80%;
+    }
+
+    .alignleft {
+        float: left;
+        padding-left: 10%;
+    }
+
+    #products {
+    }
+
+    #textbox {
+        clear: both;
+        max-width: 80%;
+    }
+
+    .btnleft {
+        float: left;
+    }
+
+    .btnright {
+        float: right;
+    }
+
+    .alignright {
+        float: right;
+        max-width: 60%;
+    }
+</style>
+
+
+<div class="container">
+    @if (Model == null || Model.ToList().Count == 0)
+    {
+        <div class="row justify-content-center mt-5">
+            <div class="d-block text-center" style="color: #65a4bd">
+                <img style="max-width:50%" src="~/Images/shparadise-logo2.png" />
+                <h1 class="text-lg-center font-weight-bold pt-5">Your Shopping Cart is empty!</h1>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="d-md-flex mt-5 mx-5 py-5 align-items-center">
+            <div class="row w-100" style="background-color:#ccd9de">
+
+                <!-- First Half -->
+
+                <div id="products" class="col-md-6 p-0 left-background">
+                    <div class="row font-weight-bold">
+                        <div class="col">
+
+                        </div>
+                        <div class="col">
+                            Product
+                        </div>
+                        <div class="col">
+                            Status
+                        </div>
+                        <div class="col">
+                            Quantity
+                        </div>
+                        <div class="col">
+                            Price
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                    <hr />
+
+                    @for (int i = 0; i < Model.ToList().Count; i++)
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <img style="max-width:100px; max-height:100px" src="@Model.ElementAt(i).Product.URL" />
+                            </div>
+                            <div class="col">
+                                @Html.DisplayFor(modelItem => @Model.ElementAt(i).Product.Name)
+                            </div>
+                            <div class="col">
+                                @Html.DisplayFor(modelItem => @Model.ElementAt(i).Status)
+                            </div>
+                            <div class="col">
+                                @Html.DisplayFor(modelItem => @Model.ElementAt(i).Quantity)
+                            </div>
+                            <div class="col">
+                                @Html.DisplayFor(modelItem => @Model.ElementAt(i).TotalAmount)
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-outline-secondary" href="/Orders/DeleteItem/@i"><i class="fa fa-trash"></i></a>
+                                @*Html.ActionLink("Delete item", "DeleteItem", "Orders", new { id = @i, @class = "fa fa-trash" })*@
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                </div>
+                <!-- Second Half -->
+
+                <div class="col-md-6 p-0  right-background float-right" style="background-color:white">
+                    <div class="h-md-100 p-5">
+                        <h1></h1>
+                        <br />
+                        <h2>Checkout</h2>
+                        <p class="text-justify form-check font-weight-bold" id="description-product">
+                            Paypal @Html.RadioButton("paying", "PayPal")
+                            Visa @Html.RadioButton("paying", "Visa")
+                        </p>
+                        <br />
+                        <p>
+                            <label>Address:</label>
+                            <input type="text" class="form-control" />
+                        </p>
+                        <p>
+                            <label>Telephone:</label>
+                            <input type="tel" class="form-control" />
+                        </p>
+
+                        <p>
+                            <label>Card Number:</label>
+                            <input type="text" class="form-control" />
+                        </p>
+                        <p>
+                            <label>Card Holder Name:</label>
+                            <input type="text" class="form-control" />
+                        </p>
+                        <p>
+                            <label>Pin:</label>
+                            <input type="password" class="form-control col-3" />
+                        </p>
+
+                        <p>
+                            @{
+                                float sum = 0;
+                                foreach (var item in Model)
+                                {
+                                    sum += item.TotalAmount;
+                                }
+                                <h4>Total amount: $@sum.ToString("0.00")</h4>
+                            }
+
+                        </p>
+                        <br />
+                        <p>
+                            <span class="btnleft">
+                                @Html.ActionLink("Cancel", "Index", "Home", new { @class = "btn btn-round", @style = "background-color:white; border-color:dimgray; color:darkcyan" })
+                            </span>
+                            <span class="btnright" style="margin-right:100px">
+                                @*@Html.ActionLink("Buy", "AddClubMember", "Account",new { id = "f5674807-2bfc-4199-b1fa-15fdd4572dee" } ,new { @class = "btn btn-round", @style = "background-color:green; color:white" });
+                                *@ 
+                                <button class="btn btn-round buyBtn" style = "background-color:green; color:white" href="/Orders/Buy">Buy</button>
+                                @*Html.ActionLink("Buy", "Buy", "Orders", new { @class = "btn btn-round buyBtn", @style = "background-color:green; color:white" })*@
+                                @Html.ActionLink("Delete whole", "DeleteWholeCart", "Orders", new { @class = "btn btn-round", @style = "background-color:red; color:white" })
+                            </span>
+                            <br />
+                        </p>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@section scripts{
+    <script>
+        $('.buyBtn').click(function () {
+            bootbox.alert({
+                size: 'large',
+                message: "Thank you for the purchase!",
+                callback: function () {
+                    location.href = "/Orders/Buy";
+                }
+            });
+        });
+    </script>
+}
+
