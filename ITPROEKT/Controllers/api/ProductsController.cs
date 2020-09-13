@@ -50,5 +50,20 @@ namespace ITPROEKT.Controllers.api
             else
                 return db.Products.Where(m => m.Name.ToLower().Contains(searchString)).Where(p => p.Seller.Name.Equals(seller)).Where(m => m.Category.ToString().Equals(category)).ToList();
         }
+
+        [Route("api/Products/Delete/{id}")]
+        public IHttpActionResult DeleteProduct(int id)
+        {
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            db.Products.Remove(product);
+            db.SaveChanges();
+
+            return Ok(product);
+        }
     }
 }

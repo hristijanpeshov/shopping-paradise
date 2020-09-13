@@ -4,6 +4,9 @@ var filterCategory = "All";
 var filterSeller = "All";
 var pageSize = 9;
 var searchString = "";
+var changedCat = false;
+var changedSell = false;
+
 $(document).ready(function () {
     ajaxCat(filterSeller, filterCategory, false);
     //Pagination
@@ -48,12 +51,14 @@ $(document).ready(function () {
     //FILTER CATEGORY
     $(".cat").click(function () {
         filterCategory = $(this).attr('cate');
+        changedCat = true;
         FilterAndSort();
     })
 
     //FILTER SELLER
     $(".seller").click(function () {
         filterSeller = $(this).attr('seller');
+        changedSell = true;
         FilterAndSort();
     })
 
@@ -75,8 +80,14 @@ function FilterAndSort() {
 }
 
 
+
 function listItems(data, sortCall) {
     //Pagination
+    if (searchString != "" || changedCat || changedSell) {
+        currentPage = 0;
+        changedCat = false;
+        changedSell = false;
+    }
     
     var pageCount = Math.ceil(data.length / 9);
     $("#pagin").empty();
@@ -124,9 +135,18 @@ function listItems(data, sortCall) {
             }
         }
         else {
-            currentPage = $(this).attr('id');
-            $("#pagin").empty();
-            ajaxCat(filterSeller, filterCategory, true);
+            var next = $(this).attr('id');
+            var abs = Math.abs(next - currentPage);
+            if ((currentPage - next) < 0) {
+                currentPage += abs;
+                $("#pagin").empty();
+                ajaxCat(filterSeller, filterCategory, true);
+            }
+            else {
+                currentPage -= abs;
+                $("#pagin").empty();
+                ajaxCat(filterSeller, filterCategory, true);
+            }
         }
     });
     
@@ -210,8 +230,8 @@ function listItems(data, sortCall) {
         var imgURL = data[i].URL;
         var productName = data[i].Name;
         var desc = data[i].Description;
-        if (desc.trim().length > 46) {
-            desc = desc.substring(0, 46) + '...';
+        if (desc.trim().length > 40) {
+            desc = desc.substring(0, 40) + '...';
         }
         var sellerName = data[i].Seller.Name;
         var rating = data[i].Rating;
@@ -236,9 +256,14 @@ function listItems(data, sortCall) {
                                             </div> \
                                         </figcaption> \
                                         <div class="bottom-wrap"> \
-                                            <a href="/Products/Details/'+ prodId + '" class="btn btn-sm text-white float-right" style="background-color:#65a4bd">Order Now</a> \
+                                            <a href="/Products/Details/'+ prodId + '" class="btn btn-sm text-white float-right mt-3 py-1" style="background-color:#65a4bd">See this product</a> \
                                             <div class="price-wrap h5"> \
-                                                <span class="price-new">' + price + '$</span> \
+                                                <div class="row"> \
+                                                    <span class="price-new">Regular price: $' + price.toFixed(2) + '</span> \
+                                                </div> \
+                                                <div class="row"> \
+                                                    <span class="price-new float-right pt-2" style="color:#65a4bd"> Club price: $' + (price * 0.8).toFixed(2) + '</span> \
+                                                </div> \
                                             </div>  \
                                         </div>  \
                                 </figure>\

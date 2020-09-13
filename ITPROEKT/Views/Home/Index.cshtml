@@ -79,9 +79,17 @@
                         </div> <!-- rating-wrap.// -->
                     </figcaption>
                     <div class="bottom-wrap">
-                        <a href="" class="btn btn-sm text-white float-right" style="background-color: #65a4bd">Order Now</a>
+                        <a href="" class="btn btn-sm text-white float-right" style="background-color: #65a4bd">See this product</a>
                         <div class="price-wrap h5">
-                            <span class="price-new">$@Html.DisplayFor(m => m.ElementAt(i).Price)</span>
+                            <div class="row">
+                                <span class="price-new">Regular price: $@Model.ElementAt(i).Price.ToString("0.00")</span>
+                            </div>
+                            <div class="row">
+                                @{
+                                    var discount = Model.ElementAt(i).Price * 0.8F;
+                                    <span class="price-new float-right pt-2" style="color:#65a4bd"> Club price: $@discount.ToString("0.00")</span>
+                                }
+                            </div>
                         </div> <!-- price-wrap.// -->
                     </div> <!-- bottom-wrap.// -->
                 </figure>

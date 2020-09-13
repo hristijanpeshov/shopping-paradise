@@ -33,6 +33,7 @@ namespace ITPROEKT.Controllers
             order.ProductId = id;
             var product = db.Products.Find(id);
             order.productInfo.Name = product.Name;
+            order.productInfo.URL = product.URL;
             string req = Request["price"];
             order.productInfo.Price = float.Parse(req.ToString());
             order.TotalAmount = order.Quantity * order.productInfo.Price;
