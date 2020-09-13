@@ -15,14 +15,15 @@ namespace ITPROEKT.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Products
+        [AllowAnonymous]
         public ActionResult Index()
         {
             ViewBag.sellers = db.Sellers;
             return View();
         }
 
-        
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult AddToCart(int id)
         {
@@ -45,7 +46,7 @@ namespace ITPROEKT.Controllers
             /*db.Orders.Add(order);
             db.SaveChanges();*/
         }
-
+        [AllowAnonymous]
         public ActionResult DailyDealDetails(int? id)
         {
             if (id == null)
@@ -60,7 +61,7 @@ namespace ITPROEKT.Controllers
             product.Price *= 0.5F;
             return View("Details", product);
         }
-
+        [AllowAnonymous]
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -75,7 +76,7 @@ namespace ITPROEKT.Controllers
             }
             return View(product);
         }
-
+        [Authorize(Roles = "Administrator")]
         // GET: Products/Create
         public ActionResult Create()
         {
@@ -100,7 +101,7 @@ namespace ITPROEKT.Controllers
             ViewBag.SellerId = new SelectList(db.Sellers, "SellerId", "Name", product.SellerId);
             return View(product);
         }
-
+        [Authorize(Roles = "Administrator")]
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -133,7 +134,7 @@ namespace ITPROEKT.Controllers
             ViewBag.SellerId = new SelectList(db.Sellers, "SellerId", "Name", product.SellerId);
             return View(product);
         }
-
+        [Authorize(Roles = "Administrator")]
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -169,13 +170,6 @@ namespace ITPROEKT.Controllers
             base.Dispose(disposing);
         }
         
-        public ActionResult Orders()
-        {
-            List<Order> products = db.Orders.ToList();
-            return View(products);
-        }
-
-
         public ActionResult DailyDeal()
         {
             var product = GetDailyDeal();

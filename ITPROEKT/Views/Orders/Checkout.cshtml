@@ -172,13 +172,17 @@
                         <br />
                         <p>
                             <span class="btnleft">
-                                @Html.ActionLink("Cancel", "Index", "Home", new { @class = "btn btn-round", @style = "background-color:white; border-color:dimgray; color:darkcyan" })
+                                <a class="btn btn-round" style = "background-color:white; border-color:dimgray; color:darkcyan" href="/Home/">Cancel</a>
                             </span>
                             <span class="btnright" style="margin-right:100px">
-                                @*@Html.ActionLink("Buy", "AddClubMember", "Account",new { id = "f5674807-2bfc-4199-b1fa-15fdd4572dee" } ,new { @class = "btn btn-round", @style = "background-color:green; color:white" });
-                                *@ 
-                                <button class="btn btn-round buyBtn" style = "background-color:green; color:white" href="/Orders/Buy">Buy</button>
-                                @*Html.ActionLink("Buy", "Buy", "Orders", new { @class = "btn btn-round buyBtn", @style = "background-color:green; color:white" })*@
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <button class="btn btn-round buyBtn" style="background-color:green; color:white" href="/Orders/Buy">Buy</button>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-round" style="background-color:green; color:white" href="/Account/Login">Login to Buy</a>
+                                }
                                 @Html.ActionLink("Delete whole", "DeleteWholeCart", "Orders", new { @class = "btn btn-round", @style = "background-color:red; color:white" })
                             </span>
                             <br />

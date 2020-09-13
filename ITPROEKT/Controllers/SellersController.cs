@@ -10,16 +10,17 @@ using ITPROEKT.Models;
 
 namespace ITPROEKT.Controllers
 {
+    [Authorize]
     public class SellersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        [Authorize(Roles = "Administrator")]
         // GET: Sellers
         public ActionResult Index()
         {
             return View(db.Sellers.ToList());
         }
-
+        [AllowAnonymous]
         // GET: Sellers/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,7 +35,7 @@ namespace ITPROEKT.Controllers
             }
             return View(seller);
         }
-
+        [Authorize(Roles = "Administrator")]
         // GET: Sellers/Create
         public ActionResult Create()
         {
@@ -57,7 +58,7 @@ namespace ITPROEKT.Controllers
 
             return View(seller);
         }
-
+        [Authorize(Roles = "Administrator")]
         // GET: Sellers/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -88,7 +89,7 @@ namespace ITPROEKT.Controllers
             }
             return View(seller);
         }
-
+        [Authorize(Roles = "Administrator")]
         // GET: Sellers/Delete/5
         public ActionResult Delete(int? id)
         {

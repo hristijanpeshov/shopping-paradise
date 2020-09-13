@@ -1,8 +1,6 @@
 ﻿@model ITPROEKT.Models.Product
 
 <style>
-    #product-details {
-    }
 
     .btn-round {
         border-radius: 30px;
@@ -21,8 +19,7 @@
     }
 
     #img-Product {
-        max-width:100%;
-        max-height:100%;
+        max-width:75%;
     }
 
     #description-product {
@@ -45,7 +42,7 @@
     }
 </style>
 <div id="product-details" style="background-color:#ccdde4">
-    <div class="d-md-flex mt-5 mx-5 py-5 align-items-center">
+    <div class="d-md-flex mx-5 py-5 align-items-center">
         <div class="row w-100" style="background-color:#ccd9de">
 
             <!-- First Half -->
@@ -59,45 +56,87 @@
             </div>
 
             <!-- Second Half -->
+            <div class="col-md-6 p-0  right-background">
+                <div class="h-md-100 p-5">
+                    <h1>@Model.Name</h1>
+                    <br />
+                    <h2>@Model.Seller.Name - @Model.Category</h2>
+                    <p class="text-justify" id="description-product">
+                        @Model.Description
+                    </p>
 
-            <div class="col-md-6 right-background align-bottom">
+                </div>
+
+                <div class="h-md-100 pb-2">
+                    <p>
+                        
+                        <div class="row h4 pl-5">
+                            <div class="col-4">
+                                Old price:
+                            </div>
+                            
+                            @{
+                                var oldPrice = Model.Price * 2;
+                                <del>$@oldPrice</del>
+                            }
+                        </div>
+                    </p>
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="h4 pl-2">Today's Deal Price:@Model.Price$</p>
+                        </div>
+                        <div class="col">
+                            @Html.ActionLink("Order Now", "DailyDealDetails", "Products", new { id = Model.Id }, new { @class = "btn text-white", @style = "background-color:#65a4bd" })
+                        </div>
+                    </div>
+
+                
+
+
+            </div>
+            
+        </div>
+
+            </div>
+
+            @*<div class="col-6 right-background py-4" style="padding-bottom: 2em">
                 <div class="row">
                     <div class="col p-5">
                         <h1>@Model.Name</h1>
                         <br />
-                        <h2>@Model.Seller.Name - @Model.Category</h2>
+                        <h2></h2>
                         <hr />
                         <p class="text-justify" id="description-product">
                             @Model.Description
                         </p>
                     </div>
                 </div>
-                    <div class="d-flex align-content-end flex-wrap">
-                        <div class="row">
-                            <div class="col pl-5 h4">
-                                Old price:
-                            </div>
-                            <div class="col-1 h4">
-                                @{
-                                    var oldPrice = Model.Price * 2;
-                                    <del>$@oldPrice</del>
-                                }
-                            </div>
-                        </div>
+
+                <div class="row pl-5">
+                    <div class="col-4 h4">
+                        Old price:
+                    </div>
+                    <div class="col-1 h4">
+                        @{
+                            var oldPrice = Model.Price * 2;
+                            <del>$@oldPrice</del>
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-8">
+                        <p class="h4 pl-2">Today's Deal Price:&nbsp;&nbsp;@Model.Price$</p>
+                    </div>
+                    <div class="col">
+                        @Html.ActionLink("Order Now", "DailyDealDetails", "Products", new { id = Model.Id }, new { @class = "btn text-white", @style = "background-color:#65a4bd" })
                     </div>
 
-                    <div class="d-flex align-content-end flex-wrap">
-                        <div class="col-8 float-left">
-                            <p class="h4 pl-2">Today's Deal Price:&nbsp;&nbsp;@Model.Price$</p>
-                        </div>
-                        <div class="col float-right">
-                            @Html.ActionLink("Order Now", "DailyDealDetails", "Products", new { id = Model.Id }, new { @class = "btn text-white", @style = "background-color:#65a4bd" })
-                        </div>
 
-                        @*<button type="button" class="btn-round text-white btn alignright" style="background-color: #65a4bd">Order Now</button>
-                        *@
-                    </div>
-                
+                </div>
+                @*<button type="button" class="btn-round text-white btn alignright" style="background-color: #65a4bd">Order Now</button>
+                *@
+
                 @*              <div class="h-md-100 pl-5 pt-2 h3">
             <p>
                 Colors: &nbsp;&nbsp;

@@ -29,7 +29,7 @@
 
 
         #description-product {
-            max-width: 80%;
+            max-width: 100%;
         }
 
         .alignleft {
@@ -39,7 +39,7 @@
 
         #textbox {
             clear: both;
-            max-width: 80%;
+            max-width: 90%;
         }
 
         .alignright {
@@ -73,6 +73,8 @@
                         @Model.Description
                         First example: create a row
                         ). Then, add the desired number of columns (tags with appropriate .col-*-* classes). The first star (*) represents the responsiveness: sm, md, lg or xl, while the second star represents a number, which should add up to 12 for each row.
+                        ow we have collected some examples of basic Bootstrap 4 grid layouts.First example: create a row
+                        ). Then, add the desired number of columns (tags with appropriate .col-*-* classes). The first star (*) represents the responsiveness: sm, md, lg or xl, while the second star represents a number, which should add up to 12 for each row.
                         ow we have collected some examples of basic Bootstrap 4 grid layouts.
                     </p>
 
@@ -80,11 +82,11 @@
 
                 <div class="h-md-100 pl-5 pt-2 h3">
 
-                    <form id="subscriptionForm" action="/Products/AddToCart" method="post">
+                    <form class="mh-100" action="/Products/AddToCart" method="post">
                         @Html.HiddenFor(m => m.Id)
                         <div class="h-md-100 pl-0 pt-2 h3" id="textbox">
-                            <p class="alignleft">Price:&nbsp;&nbsp;@Model.Price$</p>
-                            <button type="submit" id="order" class="btn-round text-white btn alignright" style="background-color: #65a4bd">Order Now</button>
+                            <p class="float-left">Price:&nbsp;&nbsp;@Model.Price$</p>
+                            <button type="submit" id="order" class="btn-round text-white btn alignright buyBtn" style="background-color: #65a4bd">Order Now</button>
                             <br />
                             <hr />
                         </div>
@@ -107,9 +109,11 @@
                                 Colors:
                             </p>
                             <div class="col-lg-6 col-sm-6">
-                                <button type="button" name="color" value="green" class="btn-round btn color-btn" style="background-color:green;width:60px;height:30px;"></button>
-                                <button type="button" name="color" value="cadetblue" class="btn-round btn color-btn" style="background-color:cadetblue;width:60px;height:30px;"></button>
-                                <button type="button" name="color" value="darkorange" class="btn-round btn color-btn" style="background-color:darkorange;width:60px;height:30px;"></button>
+                                <button type="button" name="color" clr="Black" value="black" class="btn-round btn color-btn" style="background-color:black;width:60px;height:30px;"></button>
+                                <button type="button" name="color" clr="White" value="white" class="btn-round btn color-btn btn-outline-secondary" style="background-color:white;width:60px;height:30px;"></button>
+                                <button type="button" name="color" clr="Silver" value="silver" class="btn-round btn color-btn" style="background-color:silver;width:60px;height:30px;"></button>
+                                <button type="button" name="color" clr="Cadet Blue" value="cadetblue" class="btn-round btn color-btn" style="background-color:cadetblue;width:60px;height:30px;"></button>
+                                <button type="button" name="color" clr="Dark Orange" value="green" class="btn-round btn color-btn" style="background-color:green;width:60px;height:30px;"></button>
                             </div>
                         </div>
                         <p id="selected-color">No color selected. Please select color.</p>
@@ -119,42 +123,24 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
-    </div>
+</div>
 @section Scripts{
         <script>
             $(document).ready(function () {
                 $("#Quantity").attr("value", 1);
             })
             $(".color-btn").click(function () {
-                var color = this.getAttribute("value");
+                var color = this.getAttribute("clr");
                 $("#color").attr("value", color);
                 document.getElementById("selected-color").innerHTML = "Your selected color is " + color;
-                
+
                 @*
                        
                 Session["color"] = this.getAttribute("value");
                 var cl = Session["color"];
                 alert(cl);*@
-            })
+            });
         </script>
     }

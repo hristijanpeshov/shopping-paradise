@@ -217,6 +217,11 @@ function listItems(data, sortCall) {
         var rating = data[i].Rating;
         var price = data[i].Price;
         var prodId = data[i].Id; 
+        var ratingBlock = "";
+        for (var j = 0; j < rating; j++)
+        {
+            ratingBlock += '<span class="fa fa-star" style = "color:orange"></span>'
+        }
 
         var codeBlock = '<div class="float-left bg-dark"></div> \
                             <div class="col-md-4" id = "productCard"> \
@@ -226,8 +231,8 @@ function listItems(data, sortCall) {
                                             <h4 class="title" id="productName">' + productName + '</h4> \
                                             <p class="desc">' + desc + '</p> \
                                             <a class="font-weight-bold float-right">' + sellerName + '</a> \
-                                            <div class="rating-wrap"> \
-                                                <div class="label-rating">' + rating + '</div> \
+                                            <div class="rating-wrap">' + ratingBlock +
+            '<div class="label-rating"></div> \
                                             </div> \
                                         </figcaption> \
                                         <div class="bottom-wrap"> \

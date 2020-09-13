@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace ITPROEKT.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -24,13 +25,13 @@ namespace ITPROEKT.Controllers
             finals = finals.Where(m => m.IdentityUser == userId).ToList();
             return View(finals);
         }
-
+        [AllowAnonymous]
         public ActionResult Checkout()
         {
             List<Order> finals = (List<Order>)Session["cart"];
             return View(finals);
         }
-
+        [AllowAnonymous]
         public ActionResult DeleteItem(int id)
         {
             List<Order> orders = (List<Order>)Session["cart"];
@@ -38,7 +39,7 @@ namespace ITPROEKT.Controllers
             Session["cart"] = orders;
             return RedirectToAction("Checkout");
         }
-
+        [AllowAnonymous]
         public ActionResult DeleteWholeCart()
         {
             Session["cart"] = null;
@@ -64,7 +65,6 @@ namespace ITPROEKT.Controllers
             ApplicationUser user = db.Users.Find(id);
             user.sumPaid += sum;
             db.FinalOrders.Add(finalOrder);
-            db.SaveChanges();
             Session["cart"] = null;
             if (user.sumPaid > 1500 && !User.IsInRole("ClubUser"))
             {
