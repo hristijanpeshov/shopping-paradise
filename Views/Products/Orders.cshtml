@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ITPROEKT.Models.Order>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2>Orders</h2>
+
+<div>
+    <h2>Your orders</h2>
+    <p>
+        @if (Session["cart"] != null)
+        {
+         foreach (var item in (List<ITPROEKT.Models.Order>)Session["cart"])
+        {
+            @item.ToString();
+            }
+        }
+        else
+        {
+            <span>There are no orders in your cart!</span>
+        }
+    </p>
+</div>
+
+
+
