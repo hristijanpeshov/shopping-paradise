@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ITPROEKT.Models.FinalOrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+    <div class="container mt-5 pt-3" style="background-color: #c0c0c0;border-radius:1rem">
+
+        @if (Model == null || Model.ToList().Count == 0)
+        {
+            <h2 class="pb-3">You have no orders yet. Go to the products page to make an order.</h2>
+        }
+        else
+        {
+            <h1>My orders</h1>
+            <hr style="border: 1px solid black" />
+
+            foreach (var item in Model)
+            {
+                <div class="container pb-5">
+                    <div class="row font-weight-bold" style="font-size:22px">
+                        <div class="col-1 ">
+                            ID: @item.Id
+                        </div>
+                        <div class="col">
+                            Date of order: @item.Info
+                        </div>
+                    </div>
+                    <hr />
+                    @foreach (var or in item.Orders)
+                    {
+
+                        <div class="row pt-2" style="font-size:18px">
+                            <div class="col">
+                                Name: @or.productInfo.Name
+                            </div>
+                            <div class="col">
+                                Quantity: @or.Quantity
+                            </div>
+                            <div class="col">
+                                Status: @or.Status
+                            </div>
+                            <div class="col">
+                                Total Amount: @or.TotalAmount$
+                            </div>
+                        </div>
+                    }
+                    <hr style="border: 1px solid black" />
+                </div>
+            }
+        }
+
+
+
+    </div>

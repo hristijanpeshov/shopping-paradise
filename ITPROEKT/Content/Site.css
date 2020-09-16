@@ -1,0 +1,56 @@
+﻿﻿body {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #353b48!important;
+    transition: background-color 0.4s ease!important;
+}
+.current {
+    background-color: #353b48 !important;
+}
+.current a {
+    color: white!important;
+}
+
+.page-item .page-link {
+    background-color: transparent !important;
+    color: black;
+    border-color: #6c757d !important;
+}
+.page-item .page-link:hover {
+    background-color: #353b48 !important;
+    color:white;
+    transition: background-color 0.4s ease !important;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#search {
+    width: 1200px;
+}
+
+.carousel-inner > .carousel-item > img {
+    max-width: 100%;
+    max-height: 400px;
+}
+

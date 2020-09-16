@@ -1,0 +1,152 @@
+﻿@model ITPROEKT.Models.Product
+
+<style>
+
+    .btn-round {
+        border-radius: 30px;
+    }
+
+    .left-background {
+        background-color: #e0ebf1;
+    }
+
+    .right-background {
+        background-color: white;
+    }
+
+    .text-cyan {
+        color: #35bdff;
+    }
+
+    #img-Product {
+        max-width:75%;
+    }
+
+    #description-product {
+        max-width: 80%;
+    }
+
+    .alignleft {
+        float: left;
+        padding-left: 10%;
+    }
+
+    #textbox {
+        clear: both;
+        max-width: 80%;
+    }
+
+    .alignright {
+        float: right;
+        max-width: 60%;
+    }
+</style>
+<div id="product-details" style="background-color:#ccdde4">
+    <div class="d-md-flex mx-5 py-5 align-items-center">
+        <div class="row w-100" style="background-color:#ccd9de">
+
+            <!-- First Half -->
+
+            <div class="col-md-6 p-0 left-background">
+                <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+                    <div class="logoarea pt-5 pb-5">
+                        <img id="img-Product" src="@Model.URL" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Half -->
+            <div class="col-md-6 p-0  right-background">
+                <div class="h-md-100 p-5">
+                    <h1>@Model.Name</h1>
+                    <br />
+                    <h2>@Model.Seller.Name - @Model.Category</h2>
+                    <p class="text-justify" id="description-product">
+                        @Model.Description
+                    </p>
+
+                </div>
+
+                <div class="h-md-100 pb-2">
+                    <p>
+                        
+                        <div class="row h4 pl-5">
+                            <div class="col-4">
+                                Old price:
+                            </div>
+                            
+                            @{
+                                var oldPrice = Model.Price * 2;
+                                <del>$@oldPrice</del>
+                            }
+                        </div>
+                    </p>
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="h4 pl-2">Today's Deal Price:@Model.Price$</p>
+                        </div>
+                        <div class="col">
+                            @Html.ActionLink("See this product", "DailyDealDetails", "Products", new { id = Model.Id }, new { @class = "btn text-white", @style = "background-color:#65a4bd" })
+                        </div>
+                    </div>
+
+                
+
+
+            </div>
+            
+        </div>
+
+            </div>
+
+            @*<div class="col-6 right-background py-4" style="padding-bottom: 2em">
+                <div class="row">
+                    <div class="col p-5">
+                        <h1>@Model.Name</h1>
+                        <br />
+                        <h2></h2>
+                        <hr />
+                        <p class="text-justify" id="description-product">
+                            @Model.Description
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row pl-5">
+                    <div class="col-4 h4">
+                        Old price:
+                    </div>
+                    <div class="col-1 h4">
+                        @{
+                            var oldPrice = Model.Price * 2;
+                            <del>$@oldPrice</del>
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-8">
+                        <p class="h4 pl-2">Today's Deal Price:&nbsp;&nbsp;@Model.Price$</p>
+                    </div>
+                    <div class="col">
+                        @Html.ActionLink("Order Now", "DailyDealDetails", "Products", new { id = Model.Id }, new { @class = "btn text-white", @style = "background-color:#65a4bd" })
+                    </div>
+
+
+                </div>
+                @*<button type="button" class="btn-round text-white btn alignright" style="background-color: #65a4bd">Order Now</button>
+                *@
+
+                @*              <div class="h-md-100 pl-5 pt-2 h3">
+            <p>
+                Colors: &nbsp;&nbsp;
+                <button type="button" class="btn-round btn" style="background-color:green;width:60px;height:30px;"></button>
+                <button type="button" class="btn-round btn" style="background-color:cadetblue;width:60px;height:30px;"></button>
+                <button type="button" class="btn-round btn" style="background-color:darkorange;width:60px;height:30px;"></button>
+            </p>
+        </div>*@
+
+            </div>
+        </div>
+    </div>
+</div>

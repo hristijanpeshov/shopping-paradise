@@ -1,0 +1,88 @@
+﻿@model ITPROEKT.Models.Seller
+
+@{ ViewBag.Title = "Details"; }
+
+
+@Styles.Render("~/Content/Card.css")
+<style>
+    #product-details {
+        max-width: 100%;
+    }
+
+    .btn-round {
+        border-radius: 30px;
+    }
+
+    .left-background {
+        background-color: #282726;
+    }
+
+    .right-background {
+        background-color: white;
+    }
+
+    .text-cyan {
+        color: #35bdff;
+    }
+
+    img {
+    }
+
+    #description-product {
+        max-width: 100%;
+    }
+
+    .alignleft {
+        float: left;
+        padding-left: 10%;
+    }
+
+    #textbox {
+        clear: both;
+        max-width: 80%;
+    }
+
+    .alignright {
+        float: right;
+        max-width: 60%;
+    }
+</style>
+
+<div id="product-details">
+    <div class="d-md-flex mt-5 mx-5 py-5 align-items-center">
+        <div class="row w-100" style="background-color:#ccd9de">
+
+            <!-- First Half -->
+
+            <div class="col-md-6 p-0 left-background">
+                <div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+                    <div class="pt-5 pb-5">
+                        <img class="w-75" src="@Model.URL" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Half -->
+
+            <div class="col-md-6 p-0  right-background">
+                <div class="h-md-100 p-5">
+                    <h1>@Model.Name</h1>
+                    <br />
+                    <h2>@Model.Category</h2>
+                    <p class="text-justify" id="description-product">
+                        @Model.Vision
+                    </p>
+                    
+                </div>
+
+                <div class="h-md-100 pl-5 pt-2 h5">
+                    <p>
+                        Origin: @Model.Country
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
